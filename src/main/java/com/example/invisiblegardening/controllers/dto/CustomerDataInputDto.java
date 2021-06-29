@@ -1,0 +1,25 @@
+package com.example.invisiblegardening.controllers.dto;
+
+import com.example.invisiblegardening.models.CustomerData;
+
+public class CustomerDataInputDto {
+    public Long id;
+    public String name;
+    public String address;
+    public String zipcode;
+    public String city;
+    public String emailaddress;
+    public String phoneNumber;
+
+    public CustomerData toCustomerData() {
+        var customerData = new CustomerData();
+        customerData.setId(id);
+        customerData.setCustomersName(name);
+        customerData.setCustomersAddress(address);
+        customerData.setCustomersZipcode(zipcode);
+        customerData.setCustomersCity(city);
+        customerData.setCustomersEmailaddress(emailaddress);
+        customerData.setCustomersPhoneNumber(phoneNumber);
+        return customerData;
+    }
+}

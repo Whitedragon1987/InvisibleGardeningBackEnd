@@ -1,0 +1,109 @@
+<html>
+<head>
+<title>Job.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #6a8759;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+Job.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com.example.invisiblegardening.models</span><span class="s0">;</span>
+
+<span class="s0">import </span><span class="s1">javax.persistence.*</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.util.List</span><span class="s0">;</span>
+
+<span class="s1">@Entity</span>
+<span class="s0">public class </span><span class="s1">Job {</span>
+
+    <span class="s1">@Id</span>
+    <span class="s1">@GeneratedValue</span>
+    <span class="s1">Long id</span><span class="s0">;</span>
+
+    <span class="s1">String name</span><span class="s0">;</span>
+    <span class="s1">String description</span><span class="s0">;</span>
+    <span class="s1">Boolean machineNeeded</span><span class="s0">;</span>
+    <span class="s1">Boolean employeeNeeded</span><span class="s0">;</span>
+
+    <span class="s1">@ManyToMany</span>
+    <span class="s1">List&lt;Machine&gt; machines</span><span class="s0">;</span>
+
+    <span class="s1">@ManyToMany</span>
+    <span class="s1">List&lt;Employee&gt; employees</span><span class="s0">;</span>
+
+    <span class="s1">@ManyToMany(mappedBy = </span><span class="s2">&quot;jobs&quot;</span><span class="s1">)</span>
+    <span class="s1">List&lt;CustomerRequest&gt; customerRequests</span><span class="s0">;</span>
+
+    <span class="s0">public </span><span class="s1">Long getId() {</span>
+        <span class="s0">return </span><span class="s1">id</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public </span><span class="s1">String getName() {</span>
+        <span class="s0">return </span><span class="s1">name</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public </span><span class="s1">String getDescription() {</span>
+        <span class="s0">return </span><span class="s1">description</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public </span><span class="s1">Boolean getMachineNeeded() {</span>
+        <span class="s0">return </span><span class="s1">machineNeeded</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public </span><span class="s1">Boolean getEmployeeNeeded() {</span>
+        <span class="s0">return </span><span class="s1">employeeNeeded</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public </span><span class="s1">List&lt;Machine&gt; getMachines() {</span>
+        <span class="s0">return </span><span class="s1">machines</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public </span><span class="s1">List&lt;Employee&gt; getEmployees() {</span>
+        <span class="s0">return </span><span class="s1">employees</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public </span><span class="s1">List&lt;CustomerRequest&gt; getCustomerRequests() {</span>
+        <span class="s0">return </span><span class="s1">customerRequests</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public void </span><span class="s1">setId(Long id) {</span>
+        <span class="s0">this</span><span class="s1">.id = id</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public void </span><span class="s1">setName(String name) {</span>
+        <span class="s0">this</span><span class="s1">.name = name</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public void </span><span class="s1">setDescription(String description) {</span>
+        <span class="s0">this</span><span class="s1">.description = description</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public void </span><span class="s1">setMachineNeeded(Boolean machineNeeded) {</span>
+        <span class="s0">this</span><span class="s1">.machineNeeded = machineNeeded</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public void </span><span class="s1">setEmployeeNeeded(Boolean employeeNeeded) {</span>
+        <span class="s0">this</span><span class="s1">.employeeNeeded = employeeNeeded</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public void </span><span class="s1">setMachines(List&lt;Machine&gt; machines) {</span>
+        <span class="s0">this</span><span class="s1">.machines = machines</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public void </span><span class="s1">setEmployees(List&lt;Employee&gt; employees) {</span>
+        <span class="s0">this</span><span class="s1">.employees = employees</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public void </span><span class="s1">setCustomerRequests(List&lt;CustomerRequest&gt; customerRequests) {</span>
+        <span class="s0">this</span><span class="s1">.customerRequests = customerRequests</span><span class="s0">;</span>
+    <span class="s1">}</span>
+<span class="s1">}</span>
+</pre>
+</body>
+</html>

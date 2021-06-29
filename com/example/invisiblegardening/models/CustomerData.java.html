@@ -1,0 +1,133 @@
+<html>
+<head>
+<title>CustomerData.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #6a8759;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+CustomerData.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com.example.invisiblegardening.models</span><span class="s0">;</span>
+
+<span class="s0">import </span><span class="s1">com.fasterxml.jackson.annotation.JsonBackReference</span><span class="s0">;</span>
+
+<span class="s0">import </span><span class="s1">javax.persistence.*</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.util.List</span><span class="s0">;</span>
+
+<span class="s1">@Entity</span>
+<span class="s0">public class </span><span class="s1">CustomerData {</span>
+
+    <span class="s1">@Id</span>
+    <span class="s1">@GeneratedValue</span>
+    <span class="s1">Long id</span><span class="s0">;</span>
+
+    <span class="s1">String name</span><span class="s0">;</span>
+    <span class="s1">String address</span><span class="s0">;</span>
+    <span class="s1">String zipcode</span><span class="s0">;</span>
+    <span class="s1">String city</span><span class="s0">;</span>
+    <span class="s1">String emailaddress</span><span class="s0">;</span>
+    <span class="s1">String phoneNumber</span><span class="s0">;</span>
+    <span class="s1">Boolean selectCompany</span><span class="s0">;</span>
+
+    <span class="s1">@OneToMany(mappedBy = </span><span class="s2">&quot;customerData&quot;</span><span class="s1">)</span>
+    <span class="s1">List&lt;CustomerRequest&gt; customerRequests</span><span class="s0">;</span>
+
+    <span class="s1">@OneToOne</span>
+    <span class="s1">@JsonBackReference(</span><span class="s2">&quot;customerDataCompany&quot;</span><span class="s1">)</span>
+    <span class="s1">Company company</span><span class="s0">;</span>
+
+    <span class="s0">public </span><span class="s1">Long getId() {</span>
+        <span class="s0">return </span><span class="s1">id</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public </span><span class="s1">String getName() {</span>
+        <span class="s0">return </span><span class="s1">name</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public </span><span class="s1">String getAddress() {</span>
+        <span class="s0">return </span><span class="s1">address</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public </span><span class="s1">String getZipcode() {</span>
+        <span class="s0">return </span><span class="s1">zipcode</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public </span><span class="s1">String getCity() {</span>
+        <span class="s0">return </span><span class="s1">city</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public </span><span class="s1">String getEmailaddress() {</span>
+        <span class="s0">return </span><span class="s1">emailaddress</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public </span><span class="s1">String getPhoneNumber() {</span>
+        <span class="s0">return </span><span class="s1">phoneNumber</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public </span><span class="s1">Boolean isSelectCompany() {</span>
+        <span class="s0">return </span><span class="s1">selectCompany</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public </span><span class="s1">Company getCompany() {</span>
+        <span class="s0">return </span><span class="s1">company</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public </span><span class="s1">Boolean getSelectCompany() {</span>
+        <span class="s0">return </span><span class="s1">selectCompany</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public </span><span class="s1">List&lt;CustomerRequest&gt; getCustomerRequests() {</span>
+        <span class="s0">return </span><span class="s1">customerRequests</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public void </span><span class="s1">setId(Long id) {</span>
+        <span class="s0">this</span><span class="s1">.id = id</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public void </span><span class="s1">setName(String name) {</span>
+        <span class="s0">this</span><span class="s1">.name = name</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public void </span><span class="s1">setAddress(String address) {</span>
+        <span class="s0">this</span><span class="s1">.address = address</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public void </span><span class="s1">setZipcode(String zipcode) {</span>
+        <span class="s0">this</span><span class="s1">.zipcode = zipcode</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public void </span><span class="s1">setCity(String city) {</span>
+        <span class="s0">this</span><span class="s1">.city = city</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public void </span><span class="s1">setEmailaddress(String emailaddress) {</span>
+        <span class="s0">this</span><span class="s1">.emailaddress = emailaddress</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public void </span><span class="s1">setPhoneNumber(String phoneNumber) {</span>
+        <span class="s0">this</span><span class="s1">.phoneNumber = phoneNumber</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public void </span><span class="s1">setSelectCompany(Boolean company) {</span>
+        <span class="s0">this</span><span class="s1">.selectCompany = company</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public void </span><span class="s1">setCompany(Company company) {</span>
+        <span class="s0">this</span><span class="s1">.company = company</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public void </span><span class="s1">setCustomerRequests(List&lt;CustomerRequest&gt; customerRequests) {</span>
+        <span class="s0">this</span><span class="s1">.customerRequests = customerRequests</span><span class="s0">;</span>
+    <span class="s1">}</span>
+<span class="s1">}</span>
+
+</pre>
+</body>
+</html>
