@@ -3,6 +3,7 @@ package com.example.invisiblegardening.models;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class CustomerData {
@@ -18,13 +19,12 @@ public class CustomerData {
     String customersEmailaddress;
     String customersPhoneNumber;
 
-    @OneToOne(mappedBy = "customerData")
-    @JsonBackReference("requestCustomerData")
-    Request request;
-
     @OneToOne
     @JsonBackReference("customerDataCompany")
     Company company;
+
+    @OneToMany(mappedBy = "customerData")
+    List<CustomerRequest> customerRequestList;
 
 
     public Long getId() {
@@ -55,12 +55,12 @@ public class CustomerData {
         return customersPhoneNumber;
     }
 
-    public Request getRequest() {
-        return request;
-    }
-
     public Company getCompany() {
         return company;
+    }
+
+    public List<CustomerRequest> getCustomerRequestList() {
+        return customerRequestList;
     }
 
     public void setId(Long id) {
@@ -91,12 +91,12 @@ public class CustomerData {
         this.customersPhoneNumber = customersPhoneNumber;
     }
 
-    public void setRequest(Request request) {
-        this.request = request;
-    }
-
     public void setCompany(Company company) {
         this.company = company;
+    }
+
+    public void setCustomerRequestList(List<CustomerRequest> customerRequestList) {
+        this.customerRequestList = customerRequestList;
     }
 }
 

@@ -50,6 +50,10 @@ public class Company {
         return companyPhoneNumber;
     }
 
+    public CustomerData getCustomerData() {
+        return customerData;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -78,4 +82,7 @@ public class Company {
         this.companyPhoneNumber = companyPhoneNumber;
     }
 
+    public void setCustomerData(CustomerData customerData) {
+        this.customerData = customerData;
+    }
 }

@@ -23,9 +23,8 @@ public class Machine {
     @Lob
     byte[] machineImage;
 
-    @OneToMany(mappedBy = "machine")
-    List<Request> requestList;
-
+    @ManyToMany(mappedBy = "machineList")
+    List<CustomerRequest> customerRequestList;
 
     public Long getId() {
         return id;
@@ -63,14 +62,13 @@ public class Machine {
         return machinePlannedService;
     }
 
+    public List<CustomerRequest> getCustomerRequestList() {
+        return customerRequestList;
+    }
+
     public byte[] getMachineImage() {
         return machineImage;
     }
-
-    public List<Request> getRequestList() {
-        return requestList;
-    }
-
 
     public void setId(Long id) {
         this.id = id;
@@ -112,8 +110,7 @@ public class Machine {
         this.machineImage = machineImage;
     }
 
-    public void setRequestList(List<Request> requestList) {
-        this.requestList = requestList;
+    public void setCustomerRequestList(List<CustomerRequest> customerRequestList) {
+        this.customerRequestList = customerRequestList;
     }
-
 }

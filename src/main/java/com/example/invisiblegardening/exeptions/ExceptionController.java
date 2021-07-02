@@ -1,7 +1,5 @@
-package com.example.invisiblegardening.services;
+package com.example.invisiblegardening.exeptions;
 
-import com.example.invisiblegardening.exeptions.BadRequestException;
-import com.example.invisiblegardening.exeptions.RecordNotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -9,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @ControllerAdvice
-public class ExceptionControllerAdvice {
+public class ExceptionController {
 
     @ExceptionHandler(value = RecordNotFoundException.class)
     public ResponseEntity<Object> exception(RecordNotFoundException exception) {

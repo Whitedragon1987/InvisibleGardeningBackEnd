@@ -42,40 +42,19 @@ public class MachineController {
         return dtos;
     }
 
-    @GetMapping("/{id}/image")
-    public ResponseEntity<byte[]> getImage(@PathVariable("id") Long id) {
-        var ImageBytes = machineService.getMachineImage(id);
-
-        return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename").body(ImageBytes);
-    }
-
-    @GetMapping("/machines-op-naam")
-    public List<MachineDto> findMachinesByMachineName(@RequestParam(value = "name", required = false, defaultValue = "") String name ){
-        var dtos = new ArrayList<MachineDto>();
-        var machines = machineService.findMachinesByMachineName(name);
-
-        if (name == null) {
-            machines = machineService.findMachinesByMachineName(name);
-        }
-        for (Machine machine : machines) {
-            dtos.add(MachineDto.fromMachine(machine));
-        }
-        return dtos;
-    }
-
-    @GetMapping("/machines-op-type")
-    public List<MachineDto> findMachinesByMachineType(@RequestParam(value = "type", required = false, defaultValue = "") String type ){
-        var dtos = new ArrayList<MachineDto>();
-        var machines = machineService.findMachinesByMachineType(type);
-
-        if (type == null) {
-            machines = machineService.findMachinesByMachineType(type);
-        }
-        for (Machine machine : machines) {
-            dtos.add(MachineDto.fromMachine(machine));
-        }
-        return dtos;
-    }
+//    @GetMapping("/machines-op-type")
+//    public List<MachineDto> findMachinesByMachineType(@RequestParam(value = "type", required = false, defaultValue = "") String type ) {
+//        var dtos = new ArrayList<MachineDto>();
+//        var machineList = machineService.findMachinesByMachineType(type);
+//
+//        if (type != null) {
+//            machineList = machineService.findMachinesByMachineType(type);
+//            for (Machine machine : machineList) {
+//                dtos.add(MachineDto.fromMachine(machine));
+//            }
+//        }
+//        return dtos;
+//    }
 
     @PostMapping
     public MachineDto saveMachine(@RequestBody MachineInputDto dto) {
@@ -83,31 +62,31 @@ public class MachineController {
         return MachineDto.fromMachine(machine);
     }
 
-    @PostMapping("/{id}/image")
-    public void uploadImage(@PathVariable("id")Long id, @RequestParam("file") MultipartFile file) {
-        List<String> whitelist = new ArrayList<>();
-        whitelist.add("image/gif");
-        whitelist.add("image/jpeg");
-        whitelist.add("image/png");
-        whitelist.add("image/svg+xml");
-
-        boolean valid = false;
-        for (String s : whitelist) {
-            if (file.getContentType().equals(s)) {
-                valid = true;
-                break;
-            }
-        }
-        if (!valid) {
-            throw new BadRequestException();
-        }
-
-        try {
-            machineService.uploadMachineImage(id, file);
-        } catch (Exception e) {
-            throw new RecordNotFoundException();
-        }
-    }
+//    @PostMapping("/{id}/image")
+//    public void uploadImage(@PathVariable("id")Long id, @RequestParam("file") MultipartFile file) {
+//        List<String> whitelist = new ArrayList<>();
+//        whitelist.add("image/gif");
+//        whitelist.add("image/jpeg");
+//        whitelist.add("image/png");
+//        whitelist.add("image/svg+xml");
+//
+//        boolean valid = false;
+//        for (String s : whitelist) {
+//            if (file.getContentType().equals(s)) {
+//                valid = true;
+//                break;
+//            }
+//        }
+//        if (!valid) {
+//            throw new BadRequestException();
+//        }
+//
+//        try {
+//            machineService.uploadMachineImage(id, file);
+//        } catch (Exception e) {
+//            throw new RecordNotFoundException();
+//        }
+//    }
 
     @PutMapping("/{id}")
     public MachineDto updateMachine(@PathVariable Long id, @RequestBody Machine machine) {

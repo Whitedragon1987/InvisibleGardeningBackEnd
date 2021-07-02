@@ -3,7 +3,9 @@ package com.example.invisiblegardening.controllers;
 import com.example.invisiblegardening.controllers.dto.EmployeeDto;
 import com.example.invisiblegardening.controllers.dto.EmployeeInputDto;
 import com.example.invisiblegardening.controllers.dto.IdInputDto;
+import com.example.invisiblegardening.controllers.dto.MachineDto;
 import com.example.invisiblegardening.models.Employee;
+import com.example.invisiblegardening.models.Machine;
 import com.example.invisiblegardening.services.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -30,6 +32,20 @@ public class EmployeeController {
         var dtos = new ArrayList<EmployeeDto>();
         var employees = employeeService.getEmployees();
 
+        for (Employee employee : employees) {
+            dtos.add(EmployeeDto.fromEmployee(employee));
+        }
+        return dtos;
+    }
+
+    @GetMapping("/{name}")
+    public List<EmployeeDto> findEmployeesByName(@RequestParam(value = "name", required = true, defaultValue = "") String name) {
+        var dtos = new ArrayList<EmployeeDto>();
+        var employees = employeeService.findEmployeesByName(name);
+
+        if ( name != null) {
+            employees = employeeService.findEmployeesByName(name);
+        }
         for (Employee employee : employees) {
             dtos.add(EmployeeDto.fromEmployee(employee));
         }

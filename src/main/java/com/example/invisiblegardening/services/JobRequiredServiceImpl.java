@@ -18,20 +18,20 @@ public class JobRequiredServiceImpl implements JobRequiredService{
         this.jobRepository = jobRepository;
     }
 
-    @Override
-    public void assignJobToJobRequired(Long jobId, Long jobRequiredId) {
-        var optionalJob = jobRepository.findById(jobId);
-        var optionalJobRequired = jobRequiredRepository.findById(jobRequiredId);
-
-        if (optionalJob.isPresent() && optionalJobRequired.isPresent()) {
-            var job  = optionalJob.get();
-            var jobRequired = optionalJobRequired.get();
-
-            jobRequired.setJob(job);
-            jobRequiredRepository.save(jobRequired);
-        } else {
-            throw new RecordNotFoundException();
-        }
-
-    }
+//    @Override
+//    public void assignJobToJobRequired(Long jobId, Long jobRequiredId) {
+//        var optionalJob = jobRepository.findById(jobId);
+//        var optionalJobRequired = jobRequiredRepository.findById(jobRequiredId);
+//
+//        if (optionalJob.isPresent() && optionalJobRequired.isPresent()) {
+//            var job  = optionalJob.get();
+//            var jobRequired = optionalJobRequired.get();
+//
+//            jobRequired.setJob(job);
+//            jobRequiredRepository.save(jobRequired);
+//        } else {
+//            throw new RecordNotFoundException();
+//        }
+//
+//    }
 }

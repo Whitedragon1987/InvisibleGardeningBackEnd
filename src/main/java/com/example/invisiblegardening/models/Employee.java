@@ -18,7 +18,6 @@ public class Employee {
     String cityServiceNumber;
     String ibanNumber;
 
-
     public Long getId() {
         return id;
     }

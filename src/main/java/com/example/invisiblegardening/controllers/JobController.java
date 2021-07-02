@@ -2,7 +2,10 @@ package com.example.invisiblegardening.controllers;
 
 import com.example.invisiblegardening.controllers.dto.JobDto;
 import com.example.invisiblegardening.controllers.dto.JobInputDto;
+import com.example.invisiblegardening.controllers.dto.MachineDto;
+import com.example.invisiblegardening.exeptions.BadRequestException;
 import com.example.invisiblegardening.models.Job;
+import com.example.invisiblegardening.models.Machine;
 import com.example.invisiblegardening.services.JobService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

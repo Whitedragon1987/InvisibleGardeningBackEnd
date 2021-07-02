@@ -4,7 +4,7 @@ import com.example.invisiblegardening.models.CustomerData;
 
 public class CustomerDataInputDto {
     public Long id;
-    public String name;
+    public String customersName;
     public String address;
     public String zipcode;
     public String city;
@@ -14,7 +14,7 @@ public class CustomerDataInputDto {
     public CustomerData toCustomerData() {
         var customerData = new CustomerData();
         customerData.setId(id);
-        customerData.setCustomersName(name);
+        customerData.setCustomersName(customersName);
         customerData.setCustomersAddress(address);
         customerData.setCustomersZipcode(zipcode);
         customerData.setCustomersCity(city);

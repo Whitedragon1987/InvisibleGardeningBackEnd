@@ -16,11 +16,8 @@ public class Job {
     Boolean machineNeeded;
     Boolean employeeNeeded;
 
-    @OneToMany(mappedBy = "job")
-    List<Request> requestList;
-
-    @OneToMany(mappedBy = "job")
-    List<JobRequired> jobRequiredList;
+    @ManyToMany(mappedBy = "customerRequestList")
+    List<Job> jobList;
 
     public Long getId() {
         return id;
@@ -42,12 +39,8 @@ public class Job {
         return employeeNeeded;
     }
 
-    public List<Request> getRequestList() {
-        return requestList;
-    }
-
-    public List<JobRequired> getJobRequiredList() {
-        return jobRequiredList;
+    public List<Job> getJobList() {
+        return jobList;
     }
 
     public void setId(Long id) {
@@ -70,11 +63,7 @@ public class Job {
         this.employeeNeeded = employeeNeeded;
     }
 
-    public void setRequestList(List<Request> requestList) {
-        this.requestList = requestList;
-    }
-
-    public void setJobRequiredList(List<JobRequired> jobRequiredList) {
-        this.jobRequiredList = jobRequiredList;
+    public void setJobList(List<Job> jobList) {
+        this.jobList = jobList;
     }
 }

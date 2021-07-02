@@ -27,17 +27,6 @@ public class CompanyController {
         return CompanyDto.fromCompany(company);
     }
 
-    @GetMapping
-    public List<CompanyDto> getCompany() {
-        var dtos = new ArrayList<CompanyDto>();
-        var companys = companyService.getCompanys();
-
-        for (Company company : companys) {
-            dtos.add(CompanyDto.fromCompany(company));
-        }
-        return dtos;
-    }
-
     @PostMapping
     public CompanyDto saveCompany(@RequestBody CompanyInputDto dto) {
         var company = companyService.saveCompany(dto.toCompany());

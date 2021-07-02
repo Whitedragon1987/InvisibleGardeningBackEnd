@@ -1,4 +1,4 @@
 package com.example.invisiblegardening.services;
 
-public class CompanyServiceTest {
+public class JobRequiredServiceTest {
 }
