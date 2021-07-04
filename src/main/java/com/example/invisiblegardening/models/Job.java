@@ -16,9 +16,6 @@ public class Job {
     Boolean machineNeeded;
     Boolean employeeNeeded;
 
-    @ManyToMany(mappedBy = "customerRequestList")
-    List<Job> jobList;
-
     public Long getId() {
         return id;
     }
@@ -39,10 +36,6 @@ public class Job {
         return employeeNeeded;
     }
 
-    public List<Job> getJobList() {
-        return jobList;
-    }
-
     public void setId(Long id) {
         this.id = id;
     }
@@ -61,9 +54,5 @@ public class Job {
 
     public void setEmployeeNeeded(Boolean employeeNeeded) {
         this.employeeNeeded = employeeNeeded;
-    }
-
-    public void setJobList(List<Job> jobList) {
-        this.jobList = jobList;
     }
 }

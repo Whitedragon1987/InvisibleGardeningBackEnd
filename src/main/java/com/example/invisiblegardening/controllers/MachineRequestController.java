@@ -12,7 +12,7 @@
 //
 //
 //@RestController
-//@RequestMapping("aanvragen")
+//@RequestMapping("machine-aanvragen")
 //public class MachineRequestController {
 //    private final MachineRequestService machineRequestService;
 //
@@ -25,17 +25,6 @@
 //    public MachineRequestDto getMachineRequest(@PathVariable("id") Long id) {
 //        var machineRequest = machineRequestService.getMachineRequest(id);
 //        return MachineRequestDto.fromMachineRequest(machineRequest);
-//    }
-//
-//    @GetMapping
-//    public List<MachineRequestDto> getMachineRequests() {
-//        var dtos = new ArrayList<MachineRequestDto>();
-//        var machineRequests = machineRequestService.getMachineRequests();
-//
-//        for (MachineRequest machineRequest : machineRequests) {
-//            dtos.add(MachineRequestDto.fromMachineRequest(machineRequest));
-//        }
-//        return dtos;
 //    }
 //
 //    @PostMapping
@@ -53,6 +42,11 @@
 //    @DeleteMapping("/{id}")
 //    public void deleteMachineRequest(@PathVariable("id") Long id) {
 //        machineRequestService.deleteMachineRequest(id);
+//    }
+//
+//    @PostMapping("/{id}")
+//    public void assignCustomerRequestToMachineRequest(@PathVariable("id") Long machineRequestId, @RequestBody Long customerRequestId) {
+//        machineRequestService.assignCustomerRequestToMachineRequest(machineRequestId, customerRequestId);
 //    }
 //
 //}

@@ -7,16 +7,13 @@
 //    @JsonSerialize
 //    Long id;
 //
-//    @JsonSerialize
-//    CustomerRequestDto customerRequest;
-//
-//    @JsonSerialize
-//    MachineDto machine;
+//    public CustomerRequestDto customerRequest;
 //
 //
 //    public static MachineRequestDto fromMachineRequest(MachineRequest machineRequest) {
 //        var dto = new MachineRequestDto();
 //        dto.id = machineRequest.getId();
+//        dto.customerRequest = CustomerRequestDto.fromCustomerRequest(machineRequest.getCustomerRequest());
 //        return dto;
 //    }
 //}

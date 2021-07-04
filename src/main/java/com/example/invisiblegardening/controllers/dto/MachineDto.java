@@ -12,7 +12,6 @@ public class MachineDto {
     public String description;
     public String type;
     public String measurements;
-    public Double valueOfPurchase;
     public String status;
     public Date lastService;
     public Date plannedService;
@@ -26,7 +25,6 @@ public class MachineDto {
         dto.description = machine.getMachineDescription();
         dto.type = machine.getMachineType();
         dto.measurements = machine.getMachineMeasurements();
-        dto.valueOfPurchase = machine.getMachineValueOfPurchase();
         dto.status = machine.getMachineStatus();
         dto.lastService = machine.getMachineLastService();
         dto.plannedService = machine.getMachinePlannedService();

@@ -1,6 +1,7 @@
 package com.example.invisiblegardening.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -15,15 +16,15 @@ public class CustomerRequest {
 
     LocalDateTime requestedStartTime;
     LocalDateTime requestedEndTime;
-
-    @ManyToMany
-    List<Machine> machineList;
+    LocalDateTime confirmedStartTime;
+    LocalDateTime getConfirmedEndTime;
+    RequestStatus status;
 
     @ManyToOne
     CustomerData customerData;
 
     @ManyToMany
-    List<Job> jobList;
+    List<Machine> machines;
 
     public Long getId() {
         return id;
@@ -37,16 +38,24 @@ public class CustomerRequest {
         return requestedEndTime;
     }
 
-    public List<Machine> getMachineList() {
-        return machineList;
-    }
-
-    public List<Job> getJobList() {
-        return jobList;
-    }
-
     public CustomerData getCustomerData() {
         return customerData;
+    }
+
+    public LocalDateTime getConfirmedStartTime() {
+        return confirmedStartTime;
+    }
+
+    public LocalDateTime getGetConfirmedEndTime() {
+        return getConfirmedEndTime;
+    }
+
+    public RequestStatus getStatus() {
+        return status;
+    }
+
+    public List<Machine> getMachines() {
+        return machines;
     }
 
     public void setId(Long id) {
@@ -61,16 +70,23 @@ public class CustomerRequest {
         this.requestedEndTime = requestedEndTime;
     }
 
-    public void setMachineList(List<Machine> machineList) {
-        this.machineList = machineList;
-    }
-
-    public void setJobList(List<Job> jobList) {
-        this.jobList = jobList;
-    }
-
     public void setCustomerData(CustomerData customerData) {
         this.customerData = customerData;
     }
 
+    public void setConfirmedStartTime(LocalDateTime confirmedStartTime) {
+        this.confirmedStartTime = confirmedStartTime;
+    }
+
+    public void setGetConfirmedEndTime(LocalDateTime getConfirmedEndTime) {
+        this.getConfirmedEndTime = getConfirmedEndTime;
+    }
+
+    public void setStatus(RequestStatus status) {
+        this.status = status;
+    }
+
+    public void setMachines(List<Machine> machines) {
+        this.machines = machines;
+    }
 }

@@ -15,16 +15,15 @@ public class Machine {
     String machineDescription;
     String machineType;
     String machineMeasurements;
-    Double machineValueOfPurchase;
     String machineStatus;
     Date machineLastService;
     Date machinePlannedService;
 
-    @Lob
-    byte[] machineImage;
+    @ManyToMany(mappedBy = "machines")
+    List<CustomerRequest> customerRequests;
 
-    @ManyToMany(mappedBy = "machineList")
-    List<CustomerRequest> customerRequestList;
+//    @Lob
+//    byte[] machineImage;
 
     public Long getId() {
         return id;
@@ -46,10 +45,6 @@ public class Machine {
         return machineMeasurements;
     }
 
-    public Double getMachineValueOfPurchase() {
-        return machineValueOfPurchase;
-    }
-
     public String getMachineStatus() {
         return machineStatus;
     }
@@ -62,13 +57,9 @@ public class Machine {
         return machinePlannedService;
     }
 
-    public List<CustomerRequest> getCustomerRequestList() {
-        return customerRequestList;
-    }
-
-    public byte[] getMachineImage() {
-        return machineImage;
-    }
+//    public byte[] getMachineImage() {
+//        return machineImage;
+//    }
 
     public void setId(Long id) {
         this.id = id;
@@ -90,10 +81,6 @@ public class Machine {
         this.machineMeasurements = machineMeasurements;
     }
 
-    public void setMachineValueOfPurchase(Double machineValueOfPurchase) {
-        this.machineValueOfPurchase = machineValueOfPurchase;
-    }
-
     public void setMachineStatus(String machineStatus) {
         this.machineStatus = machineStatus;
     }
@@ -106,11 +93,7 @@ public class Machine {
         this.machinePlannedService = machinePlannedService;
     }
 
-    public void setMachineImage(byte[] machineImage) {
-        this.machineImage = machineImage;
-    }
-
-    public void setCustomerRequestList(List<CustomerRequest> customerRequestList) {
-        this.customerRequestList = customerRequestList;
-    }
+//    public void setMachineImage(byte[] machineImage) {
+//        this.machineImage = machineImage;
+//    }
 }

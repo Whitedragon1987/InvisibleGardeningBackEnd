@@ -3,7 +3,6 @@ package com.example.invisiblegardening.services;
 import com.example.invisiblegardening.exeptions.RecordNotFoundException;
 import com.example.invisiblegardening.models.Job;
 import com.example.invisiblegardening.repositories.JobRepository;
-import com.example.invisiblegardening.repositories.MachineRequestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,13 +12,10 @@ import java.util.Optional;
 @Service
 public class JobServiceImpl implements JobService{
     private JobRepository jobRepository;
-    private MachineRequestRepository machineRequestRepository;
 
     @Autowired
-    public JobServiceImpl(JobRepository jobRepository,
-                          MachineRequestRepository machineRequestRepository) {
+    public JobServiceImpl(JobRepository jobRepository) {
         this.jobRepository = jobRepository;
-        this.machineRequestRepository = machineRequestRepository;
     }
 
 //  vind alle diensten en geef deze in een lijst terug

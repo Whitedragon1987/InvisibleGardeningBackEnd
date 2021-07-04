@@ -21,33 +21,25 @@ import java.util.List;
 @RequestMapping("klant-aanvragen")
 public class CustomerRequestController {
     private final CustomerRequestService customerRequestService;
-    private final MachineService machineService;
 
     @Autowired
-    public CustomerRequestController(CustomerRequestService customerRequestService,
-                                     MachineService machineService){
+    public CustomerRequestController(CustomerRequestService customerRequestService){
         this.customerRequestService = customerRequestService;
-        this.machineService = machineService;
     }
 
     @GetMapping
-    public List<CustomerRequestDto> getCustomerRequests(@RequestParam(value = "machineList", required = false) List<Machine> machineList,
-                                        @RequestParam(value = "customerData", required = false) CustomerData customerData,
+    public List<CustomerRequestDto> getCustomerRequests(@RequestParam(value = "customerDataId", required = false) CustomerData customerDataId,
                                         @RequestParam(value = "start", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime start,
                                         @RequestParam(value = "end", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime end) {
         var dtos = new ArrayList<CustomerRequestDto>();
 
+
         List<CustomerRequest> customerRequests ;
-        if (machineList != null && customerData == null && start == null && end == null) {
-            for (Machine machine : machineList) {
-               var machineId = machineService.getMachine(machine.getId());
+       if (customerDataId != null && start == null && end == null) {
 
-            customerRequests = customerRequestService.getCustomerRequestsForMachineId(machineId);
+            customerRequests = customerRequestService.getCustomerRequestsForCustomerData(customerDataId);
 
-        } }else if (customerData != null && machineList == null && start == null && end == null) {
-            customerRequests = customerRequestService.getCustomerRequestsForCustomerData(customerData);
-
-        } else if (start != null && end != null && customerData == null && machineList == null) {
+        }else if (start != null && end != null && customerDataId == null) {
             customerRequests = customerRequestService.getCustomerRequestsBetweenDates(start, end);
 
         } else {
@@ -59,6 +51,17 @@ public class CustomerRequestController {
         }
 
         return dtos;
+    }
+
+    @GetMapping("/machines")
+    public List<MachineDto> getMachines() {
+      var dtos = new ArrayList<MachineDto>();
+      var machines = customerRequestService.getMachines();
+
+      for (Machine machine : machines) {
+          dtos.add(MachineDto.fromMachine(machine));
+      }
+      return dtos;
     }
 
 
@@ -75,6 +78,6 @@ public class CustomerRequestController {
 
     @PostMapping
     public void saveCustomerRequest(@RequestBody CustomerRequestInputDto dto) {
-        customerRequestService.planCustomerRequest(dto.machineList, dto.customerData, dto.startTime, dto.endTime);
+        customerRequestService.planCustomerRequest(dto.customerDataId,dto.machines, dto.startTime, dto.endTime);
     }
 }

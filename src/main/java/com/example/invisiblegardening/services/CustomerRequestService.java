@@ -15,13 +15,11 @@ public interface CustomerRequestService {
       void deleteCustomerRequest(Long id);
       void updateCustomerRequest(Long id,CustomerRequest customerRequest);
 
-//      List<CustomerRequest> getCustomerRequestForMachineList(List<Machine> machineList, CustomerRequest customerRequest);
-
       List<CustomerRequest> getCustomerRequestsForCustomerData(CustomerData customerData);
 
       List<CustomerRequest> getCustomerRequestsBetweenDates(LocalDateTime start, LocalDateTime end);
 
-      void planCustomerRequest(List<Machine> machineList, CustomerData customerData, LocalDateTime startTime, LocalDateTime endTime);
+      void planCustomerRequest( Long customerDataId,List<Machine> machines, LocalDateTime startTime, LocalDateTime endTime);
 
-      List<CustomerRequest> getCustomerRequestsForMachineId(Machine machineId);
+      List<Machine> getMachines();
 }

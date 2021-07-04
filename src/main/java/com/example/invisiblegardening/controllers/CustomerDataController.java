@@ -1,6 +1,7 @@
 package com.example.invisiblegardening.controllers;
 
 import com.example.invisiblegardening.controllers.dto.*;
+import com.example.invisiblegardening.exeptions.BadRequestException;
 import com.example.invisiblegardening.models.CustomerData;
 import com.example.invisiblegardening.services.CustomerDataService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,15 +20,23 @@ public class CustomerDataController {
     }
 
     @GetMapping
-    public List<CustomerDataDto> getCustomerDatas() {
-        var dtos = new ArrayList<CustomerDataDto>();
-        var customerDatas = customerDataService.getCustomerDatas();
+    public List<CustomerDataDto> getCustomerDatas(@RequestParam(value = "customersName", required = false, defaultValue = "") String customersName) {
 
-        for (CustomerData customerData : customerDatas) {
+        var dtos = new ArrayList<CustomerDataDto>();
+
+        List<CustomerData> customerDataList;
+        if (customersName == null){
+            customerDataList = customerDataService.getCustomerDatas();
+        }else {
+            customerDataList = customerDataService.findCustomerDataListByCustomersName(customersName);
+        }
+
+        for (CustomerData customerData : customerDataList) {
             dtos.add(CustomerDataDto.fromCustomerData(customerData));
         }
         return dtos;
     }
+
 
     @GetMapping("/{id}")
     public CustomerDataDto getCustomerData(@PathVariable("id") Long id) {

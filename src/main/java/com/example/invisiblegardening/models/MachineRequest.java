@@ -1,5 +1,7 @@
 //package com.example.invisiblegardening.models;
 //
+//import com.fasterxml.jackson.annotation.JsonBackReference;
+//
 //import javax.persistence.*;
 //import java.util.List;
 //
@@ -10,25 +12,34 @@
 //    @GeneratedValue
 //    Long id;
 //
-//    @OneToMany(mappedBy = "machineRequest")
-//    List<Machine> machineList;
+//    @OneToOne
+//    @JsonBackReference("machineRequestCustomerRequest")
+//    CustomerRequest customerRequest;
 //
 //    @OneToMany(mappedBy = "machineRequest")
-//    List<CustomerRequest> customerRequest;
+//    List<Machine> machines;
 //
 //    public Long getId() {
 //        return id;
 //    }
 //
-//    public List<Machine> getMachineList() {
-//        return machineList;
+//    public CustomerRequest getCustomerRequest() {
+//        return customerRequest;
+//    }
+//
+//    public List<Machine> getMachines() {
+//        return machines;
 //    }
 //
 //    public void setId(Long id) {
 //        this.id = id;
 //    }
 //
-//    public void setCustomerRequest(List<CustomerRequest> customerRequest) {
+//    public void setCustomerRequest(CustomerRequest customerRequest) {
 //        this.customerRequest = customerRequest;
+//    }
+//
+//    public void setMachines(List<Machine> machines) {
+//        this.machines = machines;
 //    }
 //}

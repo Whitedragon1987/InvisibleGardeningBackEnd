@@ -15,13 +15,7 @@ public class CustomerRequestDto {
     Long id;
 
     @JsonSerialize
-    List<Machine> machineList;
-
-    @JsonSerialize
     CustomerData customerData;
-
-    @JsonSerialize
-    List<Job> jobList;
 
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     LocalDateTime startTime;
@@ -35,8 +29,6 @@ public class CustomerRequestDto {
         var dto = new CustomerRequestDto();
         dto.id = customerRequest.getId();
         dto.customerData = customerRequest.getCustomerData();
-        dto.machineList = customerRequest.getMachineList();
-//        dto.jobList = customerRequest.getJobList();
         dto.startTime = customerRequest.getRequestedStartTime();
         dto.endTime = customerRequest.getRequestedEndTime();
         return dto;

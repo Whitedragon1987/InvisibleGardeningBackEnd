@@ -1,11 +1,8 @@
 package com.example.invisiblegardening.services;
 import com.example.invisiblegardening.exeptions.BadRequestException;
 import com.example.invisiblegardening.exeptions.RecordNotFoundException;
-import com.example.invisiblegardening.models.CustomerData;
-import com.example.invisiblegardening.models.CustomerRequest;
-import com.example.invisiblegardening.models.Job;
-import com.example.invisiblegardening.models.Machine;
-//import com.example.invisiblegardening.models.MachineRequest;
+import com.example.invisiblegardening.models.*;
+//
 import com.example.invisiblegardening.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,19 +15,16 @@ import java.util.Optional;
 @Service
 public class CustomerRequestServiceImpl implements CustomerRequestService{
     private CustomerRequestRepository customerRequestRepository;
-    private MachineRepository machineRepository;
     private CustomerDataRepository customerDataRepository;
-    private JobRepository jobRepository;
+    private MachineRepository machineRepository;
 
     @Autowired
     public CustomerRequestServiceImpl(CustomerRequestRepository customerRequestRepository,
-                                      MachineRepository machineRepository,
                                       CustomerDataRepository customerDataRepository,
-                                      JobRepository jobRepository) {
+                                      MachineRepository machineRepository){
         this.customerRequestRepository = customerRequestRepository;
-        this.machineRepository = machineRepository;
         this.customerDataRepository = customerDataRepository;
-        this.jobRepository = jobRepository;
+        this.machineRepository = machineRepository;
     }
 
     @Override
@@ -55,29 +49,47 @@ public class CustomerRequestServiceImpl implements CustomerRequestService{
 
     @Override
     public List<CustomerRequest> getCustomerRequestsForCustomerData(CustomerData customerData) {
-        return null;
+        var optionalCustomerDataId = customerDataRepository.findById(customerData.getId());
+
+        if (optionalCustomerDataId.isPresent()) {
+            var customerDataId = optionalCustomerDataId.get();
+            return customerRequestRepository.findByCustomerData(customerDataId);
+        } else {
+            throw new RecordNotFoundException("geen aanvragen gevonden voor klant");
+        }
     }
 
     @Override
     public List<CustomerRequest> getCustomerRequestsBetweenDates(LocalDateTime start, LocalDateTime end) {
-        return null;
+       return customerRequestRepository.findByRequestedStartTimeBetween(start, end);
     }
 
     @Override
-    public void planCustomerRequest(List<Machine> machineList, CustomerData customerData, LocalDateTime startTime, LocalDateTime endTime) {
+    public void planCustomerRequest(Long customerDataId,List<Machine> machines, LocalDateTime requestedStartTime, LocalDateTime requestedEndTime) {
+        var optionalCustomerData  = customerDataRepository.findById(customerDataId);
+        var optionalMachines = machineRepository.findAll();
 
-    }
-
-    @Override
-    public List<CustomerRequest> getCustomerRequestsForMachineId(Machine machineId) {
-        var optionalMachine = machineRepository.findById(machineId.getId());
-
-        if (optionalMachine.isPresent()) {
-            var machine = optionalMachine.get();
-            return customerRequestRepository.findByMachine(machine);
-        } else {
-            throw new RecordNotFoundException("machine bestaat niet");
+        if (optionalCustomerData.isEmpty()){
+            throw new BadRequestException("klantgegevens mogen niet leeg zijn");
+        } else if (optionalMachines.isEmpty()){
+            throw new BadRequestException("machinesaanvraag mag niet leeg zijn");
         }
+
+        var customerdata = optionalCustomerData.get();
+        var machine = optionalMachines.addAll(machines);
+
+//        vallidatRequestSlotIsFree(requestedStartTime, requestedEndTime);
+
+        var customerRequest = new CustomerRequest();
+        customerRequest.setCustomerData(customerdata);
+        customerRequest.setRequestedStartTime(requestedStartTime);
+        customerRequest.setRequestedEndTime(requestedEndTime);
+        customerRequest.setStatus(RequestStatus.PLANNED);
+        customerRequest.setMachines(machines);
     }
 
+    @Override
+    public List<Machine> getMachines() {
+        return machineRepository.findAll();
+    }
 }

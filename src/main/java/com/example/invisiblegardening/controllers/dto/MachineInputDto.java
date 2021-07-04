@@ -3,6 +3,7 @@ package com.example.invisiblegardening.controllers.dto;
 import com.example.invisiblegardening.models.Machine;
 
 import java.util.Date;
+import java.util.List;
 
 public class MachineInputDto {
     public Long id;
@@ -10,7 +11,6 @@ public class MachineInputDto {
     public String description;
     public String type;
     public String measurements;
-    public Double valueOfPurchase;
     public String status;
     public Date lastService;
     public Date plannedService;
@@ -22,7 +22,6 @@ public class MachineInputDto {
         machine.setMachineDescription(description);
         machine.setMachineType(type);
         machine.setMachineMeasurements(measurements);
-        machine.setMachineValueOfPurchase(valueOfPurchase);
         machine.setMachineStatus(status);
         machine.setMachineLastService(lastService);
         machine.setMachinePlannedService(plannedService);
