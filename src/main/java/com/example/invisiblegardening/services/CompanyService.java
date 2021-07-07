@@ -2,8 +2,6 @@ package com.example.invisiblegardening.services;
 
 import com.example.invisiblegardening.models.Company;
 
-import java.util.List;
-
 public interface CompanyService {
 
     Company getCompany(Long id);

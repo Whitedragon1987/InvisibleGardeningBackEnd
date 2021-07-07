@@ -2,7 +2,6 @@ package com.example.invisiblegardening.services;
 
 import com.example.invisiblegardening.exeptions.RecordNotFoundException;
 import com.example.invisiblegardening.models.Employee;
-import com.example.invisiblegardening.models.Job;
 import com.example.invisiblegardening.repositories.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

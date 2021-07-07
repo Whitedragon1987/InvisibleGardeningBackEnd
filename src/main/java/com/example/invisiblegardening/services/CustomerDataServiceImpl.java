@@ -6,7 +6,6 @@ import com.example.invisiblegardening.repositories.CompanyRepository;
 import com.example.invisiblegardening.repositories.CustomerDataRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -30,8 +29,8 @@ public class CustomerDataServiceImpl implements CustomerDataService{
 
 //  vind klantgegevens aan de hand van de naam en geef deze in een lijst terug
     @Override
-    public List<CustomerData> findCustomerDataListByCustomersNameContainingIngnoreCase(String customersName) {
-        return customerDataRepository.findCustomerDataListByCustomersNameContainingIngnoreCase(customersName);}
+    public List<CustomerData> findCustomerDataListByCustomersName(String customersName) {
+        return customerDataRepository.findByCustomersNameContainingIgnoreCase(customersName);}
 
 //  vind klantgegevens aan de hand van een id, als het id niet bestaat geef een record not found exception
     @Override

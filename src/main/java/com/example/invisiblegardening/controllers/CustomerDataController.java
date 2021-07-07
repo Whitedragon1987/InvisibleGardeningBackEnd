@@ -19,7 +19,7 @@ public class CustomerDataController {
     }
 
     @GetMapping
-    public List<CustomerDataDto> getCustomerDatas(@RequestParam(value = "customersName", required = false, defaultValue = "") String customersName) {
+    public List<CustomerDataDto> getCustomerDatas(@RequestParam(value = "customers_name", required = false, defaultValue = "") String customersName) {
 
         var dtos = new ArrayList<CustomerDataDto>();
 
@@ -27,7 +27,7 @@ public class CustomerDataController {
         if (customersName == null){
             customerDataList = customerDataService.getCustomerDatas();
         }else {
-            customerDataList = customerDataService.findCustomerDataListByCustomersNameContainingIngnoreCase(customersName);
+            customerDataList = customerDataService.findCustomerDataListByCustomersName(customersName);
         }
 
         for (CustomerData customerData : customerDataList) {

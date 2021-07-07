@@ -58,10 +58,6 @@ public class CustomerData {
         return company;
     }
 
-    public List<CustomerRequest> getCustomerRequestList() {
-        return customerRequestList;
-    }
-
     public void setId(Long id) {
         this.id = id;
     }
@@ -94,8 +90,5 @@ public class CustomerData {
         this.company = company;
     }
 
-    public void setCustomerRequestList(List<CustomerRequest> customerRequestList) {
-        this.customerRequestList = customerRequestList;
-    }
 }
 
