@@ -6,16 +6,16 @@ public class JobDto {
     public Long id;
     public String name;
     public String description;
-    public Boolean machineNeeded;
     public Boolean employeeNeeded;
+    public EmployeeDto employee;
 
     public static JobDto fromJob(Job job) {
         var dto = new JobDto();
         dto.id = job.getId();
         dto.name = job.getJobName();
         dto.description = job.getJobDescription();
-        dto.machineNeeded = job.getMachineNeeded();
         dto.employeeNeeded = job.getEmployeeNeeded();
+        dto.employee = EmployeeDto.fromEmployee(job.getEmployee());
         return dto;
     }
 }

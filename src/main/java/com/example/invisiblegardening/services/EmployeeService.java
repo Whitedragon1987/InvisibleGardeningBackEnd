@@ -8,15 +8,12 @@ import java.util.List;
 public interface EmployeeService {
 
     List<Employee> getEmployees();
+    List<Employee> findEmployeesByName(String query);
 
     Employee getEmployee(Long id);
-
-    List<Employee> findEmployeesByName(String name);
-
     Employee saveEmployee(Employee employee);
 
     void deleteEmployee(Long id);
-
     void updateEmployee(Long id, Employee employee);
 
 }

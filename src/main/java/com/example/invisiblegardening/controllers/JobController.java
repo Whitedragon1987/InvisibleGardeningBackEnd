@@ -1,11 +1,9 @@
 package com.example.invisiblegardening.controllers;
 
+import com.example.invisiblegardening.controllers.dto.IdInputDto;
 import com.example.invisiblegardening.controllers.dto.JobDto;
 import com.example.invisiblegardening.controllers.dto.JobInputDto;
-import com.example.invisiblegardening.controllers.dto.MachineDto;
-import com.example.invisiblegardening.exeptions.BadRequestException;
 import com.example.invisiblegardening.models.Job;
-import com.example.invisiblegardening.models.Machine;
 import com.example.invisiblegardening.services.JobService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -43,14 +41,19 @@ public class JobController {
         return JobDto.fromJob(job);
     }
 
-    @DeleteMapping("/{id}")
-    public void deleteJob(@PathVariable("id") Long id) {
-        jobService.deleteJob(id);
+    @PostMapping("/{id}/werknemer")
+    public void assignEmployeeToJob(@PathVariable("id") Long jobId, @RequestBody IdInputDto input) {
+        jobService.assignEmployee(jobId, input.id);
     }
 
-    @PutMapping("/{id}")
+       @PutMapping("/{id}")
     public JobDto updateJob(@PathVariable Long id, @RequestBody Job job) {
         jobService.updateJob(id, job);
         return JobDto.fromJob(job);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteJob(@PathVariable("id") Long id) {
+        jobService.deleteJob(id);
     }
 }

@@ -1,17 +1,11 @@
 package com.example.invisiblegardening.controllers;
 
-import com.example.invisiblegardening.controllers.dto.IdInputDto;
 import com.example.invisiblegardening.controllers.dto.MachineDto;
 import com.example.invisiblegardening.controllers.dto.MachineInputDto;
-import com.example.invisiblegardening.exeptions.BadRequestException;
-import com.example.invisiblegardening.exeptions.RecordNotFoundException;
 import com.example.invisiblegardening.models.Machine;
 import com.example.invisiblegardening.services.MachineService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,13 +19,7 @@ public class MachineController {
     public MachineController(MachineService machineService) {
         this.machineService = machineService;}
 
-    @GetMapping("/{id}")
-    public MachineDto getMachine(@PathVariable("id") Long id) {
-        var machine = machineService.getMachine(id);
-        return MachineDto.fromMachine(machine);
-    }
-
-    @GetMapping
+       @GetMapping
     public List<MachineDto> getMachines() {
         var dtos = new ArrayList<MachineDto>();
         var machines = machineService.getMachines();
@@ -42,51 +30,17 @@ public class MachineController {
         return dtos;
     }
 
-//    @GetMapping("/machines-op-type")
-//    public List<MachineDto> findMachinesByMachineType(@RequestParam(value = "type", required = false, defaultValue = "") String type ) {
-//        var dtos = new ArrayList<MachineDto>();
-//        var machineList = machineService.findMachinesByMachineType(type);
-//
-//        if (type != null) {
-//            machineList = machineService.findMachinesByMachineType(type);
-//            for (Machine machine : machineList) {
-//                dtos.add(MachineDto.fromMachine(machine));
-//            }
-//        }
-//        return dtos;
-//    }
+    @GetMapping("/{id}")
+    public MachineDto getMachine(@PathVariable("id") Long id) {
+        var machine = machineService.getMachine(id);
+        return MachineDto.fromMachine(machine);
+    }
 
     @PostMapping
     public MachineDto saveMachine(@RequestBody MachineInputDto dto) {
         var machine = machineService.saveMachine(dto.toMachine());
         return MachineDto.fromMachine(machine);
     }
-
-//    @PostMapping("/{id}/image")
-//    public void uploadImage(@PathVariable("id")Long id, @RequestParam("file") MultipartFile file) {
-//        List<String> whitelist = new ArrayList<>();
-//        whitelist.add("image/gif");
-//        whitelist.add("image/jpeg");
-//        whitelist.add("image/png");
-//        whitelist.add("image/svg+xml");
-//
-//        boolean valid = false;
-//        for (String s : whitelist) {
-//            if (file.getContentType().equals(s)) {
-//                valid = true;
-//                break;
-//            }
-//        }
-//        if (!valid) {
-//            throw new BadRequestException();
-//        }
-//
-//        try {
-//            machineService.uploadMachineImage(id, file);
-//        } catch (Exception e) {
-//            throw new RecordNotFoundException();
-//        }
-//    }
 
     @PutMapping("/{id}")
     public MachineDto updateMachine(@PathVariable Long id, @RequestBody Machine machine) {

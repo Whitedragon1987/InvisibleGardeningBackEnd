@@ -1,7 +1,6 @@
 package com.example.invisiblegardening.controllers;
 
 import com.example.invisiblegardening.controllers.dto.*;
-import com.example.invisiblegardening.exeptions.BadRequestException;
 import com.example.invisiblegardening.models.CustomerData;
 import com.example.invisiblegardening.services.CustomerDataService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("klantdata")
+@RequestMapping("/klantdata")
 public class CustomerDataController {
     private final CustomerDataService customerDataService;
 
@@ -28,7 +27,7 @@ public class CustomerDataController {
         if (customersName == null){
             customerDataList = customerDataService.getCustomerDatas();
         }else {
-            customerDataList = customerDataService.findCustomerDataListByCustomersName(customersName);
+            customerDataList = customerDataService.findCustomerDataListByCustomersNameContainingIngnoreCase(customersName);
         }
 
         for (CustomerData customerData : customerDataList) {
@@ -50,12 +49,7 @@ public class CustomerDataController {
         return CustomerDataDto.fromCustomerData(customerData);
     }
 
-    @DeleteMapping("/{id}")
-    public void deleteCustomerData(@PathVariable("id") Long id) {
-        customerDataService.deleteCustomerData(id);
-    }
-
-    @PutMapping("/{id}")
+        @PutMapping("/{id}")
     public CustomerDataDto updateCustomerData(@PathVariable Long id, @RequestBody CustomerData customerData) {
         customerDataService.updateCustomerData(id, customerData);
         return CustomerDataDto.fromCustomerData(customerData);
@@ -65,4 +59,11 @@ public class CustomerDataController {
     public void assignCompanyToCustomerData(@PathVariable("id") Long customerDataId,@RequestBody IdInputDto input) {
         customerDataService.assignCompanyToCustomerData(customerDataId, input.id);
     }
+
+    @DeleteMapping("/{id}")
+    public void deleteCustomerData(@PathVariable("id") Long id) {
+        customerDataService.deleteCustomerData(id);
+    }
+
+
 }

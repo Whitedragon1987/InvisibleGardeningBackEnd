@@ -15,9 +15,6 @@ public class EmployeeDto {
     public String cityServiceNumber;
     public String ibanNumber;
 
-    @JsonSerialize
-    Job job;
-
 
     public static EmployeeDto fromEmployee(Employee employee) {
         var dto = new EmployeeDto();

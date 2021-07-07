@@ -1,7 +1,6 @@
 package com.example.invisiblegardening.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import javax.persistence.*;
 import java.util.List;
 

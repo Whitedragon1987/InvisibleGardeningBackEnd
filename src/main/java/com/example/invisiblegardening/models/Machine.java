@@ -15,15 +15,12 @@ public class Machine {
     String machineDescription;
     String machineType;
     String machineMeasurements;
-    String machineStatus;
     Date machineLastService;
     Date machinePlannedService;
 
-    @ManyToMany(mappedBy = "machines")
+    @OneToMany(mappedBy = "machine")
     List<CustomerRequest> customerRequests;
 
-//    @Lob
-//    byte[] machineImage;
 
     public Long getId() {
         return id;
@@ -45,10 +42,6 @@ public class Machine {
         return machineMeasurements;
     }
 
-    public String getMachineStatus() {
-        return machineStatus;
-    }
-
     public Date getMachineLastService() {
         return machineLastService;
     }
@@ -56,10 +49,6 @@ public class Machine {
     public Date getMachinePlannedService() {
         return machinePlannedService;
     }
-
-//    public byte[] getMachineImage() {
-//        return machineImage;
-//    }
 
     public void setId(Long id) {
         this.id = id;
@@ -81,10 +70,6 @@ public class Machine {
         this.machineMeasurements = machineMeasurements;
     }
 
-    public void setMachineStatus(String machineStatus) {
-        this.machineStatus = machineStatus;
-    }
-
     public void setMachineLastService(Date machineLastService) {
         this.machineLastService = machineLastService;
     }
@@ -93,7 +78,4 @@ public class Machine {
         this.machinePlannedService = machinePlannedService;
     }
 
-//    public void setMachineImage(byte[] machineImage) {
-//        this.machineImage = machineImage;
-//    }
 }

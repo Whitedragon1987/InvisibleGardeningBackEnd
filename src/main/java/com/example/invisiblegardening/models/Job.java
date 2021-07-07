@@ -1,8 +1,10 @@
 package com.example.invisiblegardening.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 import javax.persistence.*;
 import java.util.List;
-
 
 @Entity
 public class Job {
@@ -13,8 +15,14 @@ public class Job {
 
     String jobName;
     String jobDescription;
-    Boolean machineNeeded;
     Boolean employeeNeeded;
+
+    @OneToOne
+    @JsonBackReference("jobEmplyoee")
+    Employee employee;
+
+    @OneToMany(mappedBy = "job")
+    List<CustomerRequest> customerRequests;
 
     public Long getId() {
         return id;
@@ -28,12 +36,12 @@ public class Job {
         return jobDescription;
     }
 
-    public Boolean getMachineNeeded() {
-        return machineNeeded;
-    }
-
     public Boolean getEmployeeNeeded() {
         return employeeNeeded;
+    }
+
+    public Employee getEmployee() {
+        return employee;
     }
 
     public void setId(Long id) {
@@ -48,11 +56,11 @@ public class Job {
         this.jobDescription = jobDescription;
     }
 
-    public void setMachineNeeded(Boolean machineNeeded) {
-        this.machineNeeded = machineNeeded;
-    }
-
     public void setEmployeeNeeded(Boolean employeeNeeded) {
         this.employeeNeeded = employeeNeeded;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
     }
 }

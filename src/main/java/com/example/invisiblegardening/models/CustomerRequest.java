@@ -1,11 +1,8 @@
 package com.example.invisiblegardening.models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.List;
+
 
 @Entity
 public class CustomerRequest {
@@ -17,14 +14,18 @@ public class CustomerRequest {
     LocalDateTime requestedStartTime;
     LocalDateTime requestedEndTime;
     LocalDateTime confirmedStartTime;
-    LocalDateTime getConfirmedEndTime;
+    LocalDateTime confirmedEndTime;
     RequestStatus status;
 
     @ManyToOne
     CustomerData customerData;
 
-    @ManyToMany
-    List<Machine> machines;
+    @ManyToOne
+    Machine machine;
+
+    @ManyToOne
+    Job job;
+
 
     public Long getId() {
         return id;
@@ -46,16 +47,20 @@ public class CustomerRequest {
         return confirmedStartTime;
     }
 
-    public LocalDateTime getGetConfirmedEndTime() {
-        return getConfirmedEndTime;
+    public LocalDateTime getConfirmedEndTime() {
+        return confirmedEndTime;
     }
 
     public RequestStatus getStatus() {
         return status;
     }
 
-    public List<Machine> getMachines() {
-        return machines;
+    public Machine getMachine() {
+        return machine;
+    }
+
+    public Job getJob() {
+        return job;
     }
 
     public void setId(Long id) {
@@ -78,15 +83,19 @@ public class CustomerRequest {
         this.confirmedStartTime = confirmedStartTime;
     }
 
-    public void setGetConfirmedEndTime(LocalDateTime getConfirmedEndTime) {
-        this.getConfirmedEndTime = getConfirmedEndTime;
+    public void setConfirmedEndTime(LocalDateTime getConfirmedEndTime) {
+        this.confirmedEndTime = getConfirmedEndTime;
     }
 
     public void setStatus(RequestStatus status) {
         this.status = status;
     }
 
-    public void setMachines(List<Machine> machines) {
-        this.machines = machines;
+    public void setMachine(Machine machine) {
+        this.machine = machine;
+    }
+
+    public void setJob(Job job) {
+        this.job = job;
     }
 }

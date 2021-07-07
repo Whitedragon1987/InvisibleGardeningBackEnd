@@ -5,15 +5,12 @@ import com.example.invisiblegardening.models.Machine;
 import com.example.invisiblegardening.repositories.MachineRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class MachineServiceImpl implements MachineService{
     private MachineRepository machineRepository;
-
 
     @Autowired
     public MachineServiceImpl(MachineRepository machineRepository) {
@@ -38,21 +35,6 @@ public class MachineServiceImpl implements MachineService{
         return machineRepository.findAll();
     }
 
-//    @Override
-//    public byte[] getMachineImage(Long id) {
-//        var optionalMachine = machineRepository.findById(id);
-//        if (optionalMachine.isPresent()) {
-//            return optionalMachine.get().getMachineImage();
-//        } else {
-//            throw new RecordNotFoundException();
-//        }
-//    }
-
-//    @Override
-//    public List<Machine> findMachinesByMachineName(String name) {
-//        return machineRepository.findMachinesByMachineName(name);
-//    }
-
 //  sla een nieuwe machine op
     @Override
     public Machine saveMachine(Machine machine) {
@@ -75,18 +57,4 @@ public class MachineServiceImpl implements MachineService{
     public void deleteMachine(Long id) {
         machineRepository.deleteById(id);
     }
-
-//    @Override
-//    public void uploadMachineImage(Long id, MultipartFile file) throws IOException {
-//        var optionalMachine = machineRepository.findById(id);
-//        if (optionalMachine.isPresent()) {
-//            var machine = optionalMachine.get();
-//            machine.setMachineImage(file.getBytes());
-//            machineRepository.save(machine);
-//        } else {
-//            throw new RecordNotFoundException();
-//        }
-//    }
-
-
 }

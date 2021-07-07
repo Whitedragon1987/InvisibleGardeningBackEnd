@@ -2,12 +2,10 @@ package com.example.invisiblegardening.services;
 
 import com.example.invisiblegardening.exeptions.RecordNotFoundException;
 import com.example.invisiblegardening.models.Employee;
-import com.example.invisiblegardening.models.Machine;
+import com.example.invisiblegardening.models.Job;
 import com.example.invisiblegardening.repositories.EmployeeRepository;
-import com.example.invisiblegardening.repositories.JobRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -28,27 +26,27 @@ public class EmployeeServiceImpl implements EmployeeService{
         return employeeRepository.findAll();
     }
 
+//  vind alle medewerkers aan de hand van een naam en geef deze in een lijst terug
+    @Override
+    public List<Employee> findEmployeesByName(String query) {
+        return employeeRepository.findByNameContainingIgnoreCase(query);}
+
 //  vind een medewerker aan de hand van een id
     @Override
     public Employee getEmployee(Long id) {
-       return employeeRepository.getById(id);
-    }
+        Optional<Employee> employee = employeeRepository.findById(id);
 
-//  vind alle medewerkers aan de hand van een naam en geef deze in een lijst terug
-    @Override
-    public List<Employee> findEmployeesByName(String name) {
-       return employeeRepository.findEmployeesByName(name);}
+        if(employee.isPresent()) {
+            return employee.get();
+        } else {
+            throw new RecordNotFoundException("Machine does not exist");
+        }
+    }
 
 //  sla een nieuwe medewerker op
     @Override
     public Employee saveEmployee(Employee employee) {
         return employeeRepository.save(employee);
-    }
-
-//  verwijder een medewerker aan de hand van een id
-    @Override
-    public void deleteEmployee(Long id) {
-       employeeRepository.deleteById(id);
     }
 
 //  wijzig een medewerker aan de hand van een id, als id niet bestaat geef een record not fout exception
@@ -61,4 +59,12 @@ public class EmployeeServiceImpl implements EmployeeService{
             throw new RecordNotFoundException("employee does not exist");
         }
     }
+
+//  verwijder een medewerker aan de hand van een id
+    @Override
+    public void deleteEmployee(Long id) {
+        employeeRepository.deleteById(id);
+    }
+
+
 }

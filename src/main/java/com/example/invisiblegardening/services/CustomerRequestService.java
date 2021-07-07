@@ -1,25 +1,19 @@
 package com.example.invisiblegardening.services;
 
-import com.example.invisiblegardening.models.CustomerData;
-import com.example.invisiblegardening.models.CustomerRequest;
-import com.example.invisiblegardening.models.Job;
-import com.example.invisiblegardening.models.Machine;
+import com.example.invisiblegardening.models.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 
 public interface CustomerRequestService {
+    List<CustomerRequest> getCustomerRequestBetweenDates(LocalDateTime start, LocalDateTime end);
+    List<CustomerRequest> getCustomerRequestsForMachine(Long machineId);
+    List<CustomerRequest> getCustomerRequestsForJob(Long jobId);
+    List<CustomerRequest> getCustomerRequestsForCustomerData(Long customerDataId);
 
-      CustomerRequest getById(Long id);
-      void deleteCustomerRequest(Long id);
-      void updateCustomerRequest(Long id,CustomerRequest customerRequest);
+    void planCustomerRequest(Long machineId, Long jobId, Long customerDataId, LocalDateTime plannedStartTime, LocalDateTime plannedEndTime);
 
-      List<CustomerRequest> getCustomerRequestsForCustomerData(CustomerData customerData);
-
-      List<CustomerRequest> getCustomerRequestsBetweenDates(LocalDateTime start, LocalDateTime end);
-
-      void planCustomerRequest( Long customerDataId,List<Machine> machines, LocalDateTime startTime, LocalDateTime endTime);
-
-      List<Machine> getMachines();
+    CustomerRequest completeCustomerRequest(Long customerRequestId, LocalDateTime actualStartTime, LocalDateTime actualEndTime);
+    CustomerRequest cancelCustomerRequest(Long customerRequestId);
 }

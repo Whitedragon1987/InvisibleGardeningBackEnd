@@ -28,6 +28,11 @@ public class CustomerDataServiceImpl implements CustomerDataService{
         return customerDataRepository.findAll();
     }
 
+//  vind klantgegevens aan de hand van de naam en geef deze in een lijst terug
+    @Override
+    public List<CustomerData> findCustomerDataListByCustomersNameContainingIngnoreCase(String customersName) {
+        return customerDataRepository.findCustomerDataListByCustomersNameContainingIngnoreCase(customersName);}
+
 //  vind klantgegevens aan de hand van een id, als het id niet bestaat geef een record not found exception
     @Override
     public CustomerData getCustomerData(Long id) {
@@ -39,21 +44,10 @@ public class CustomerDataServiceImpl implements CustomerDataService{
         }
     }
 
-//  vind klantgegevens aan de hand van de naam en geef deze in een lijst terug
-    @Override
-    public List<CustomerData> findCustomerDataListByCustomersName(String customersName) {
-        return customerDataRepository.findCustomerDataListByCustomersName(customersName);}
-
 //  sla nieuwe klantgegevens op
     @Override
     public CustomerData saveCustomerData(CustomerData customerData) {
         return customerDataRepository.save(customerData);
-    }
-
-//  verwijder bestaande klant gegevens aan de hand van een id
-    @Override
-    public void deleteCustomerData(Long id) {
-        customerDataRepository.deleteById(id);
     }
 
 //  wijzig klantgegevens aan de hand van een id, als id niet bestaat geef record not found exception
@@ -83,4 +77,9 @@ public class CustomerDataServiceImpl implements CustomerDataService{
         }
     }
 
+//  verwijder bestaande klant gegevens aan de hand van een id
+    @Override
+    public void deleteCustomerData(Long id) {
+        customerDataRepository.deleteById(id);
+    }
 }
