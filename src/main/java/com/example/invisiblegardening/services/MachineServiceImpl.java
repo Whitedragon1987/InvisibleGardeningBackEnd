@@ -46,6 +46,7 @@ public class MachineServiceImpl implements MachineService{
     public void updateMachine(Long id, Machine machine) {
         Optional<Machine> optionalMachine = machineRepository.findById(id);
         if(optionalMachine.isPresent()) {
+            machineRepository.deleteById(id);
             machineRepository.save(machine);
         } else {
             throw new RecordNotFoundException("Machine does not exist");

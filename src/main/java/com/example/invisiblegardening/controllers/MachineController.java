@@ -6,11 +6,12 @@ import com.example.invisiblegardening.models.Machine;
 import com.example.invisiblegardening.services.MachineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.ArrayList;
 import java.util.List;
 
+
 @RestController
+@CrossOrigin
 @RequestMapping("machines")
 public class MachineController {
     private final MachineService machineService;
@@ -19,7 +20,7 @@ public class MachineController {
     public MachineController(MachineService machineService) {
         this.machineService = machineService;}
 
-       @GetMapping
+    @GetMapping
     public List<MachineDto> getMachines() {
         var dtos = new ArrayList<MachineDto>();
         var machines = machineService.getMachines();

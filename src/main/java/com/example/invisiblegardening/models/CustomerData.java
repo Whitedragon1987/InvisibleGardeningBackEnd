@@ -25,6 +25,9 @@ public class CustomerData {
     @OneToMany(mappedBy = "customerData")
     List<CustomerRequest> customerRequestList;
 
+    @OneToOne
+    User user;
+
 
     public Long getId() {
         return id;
@@ -56,6 +59,10 @@ public class CustomerData {
 
     public Company getCompany() {
         return company;
+    }
+
+    public User getUser() {
+        return user;
     }
 
     public void setId(Long id) {
@@ -90,5 +97,8 @@ public class CustomerData {
         this.company = company;
     }
 
+    public void setUser(User user) {
+        this.user = user;
+    }
 }
 

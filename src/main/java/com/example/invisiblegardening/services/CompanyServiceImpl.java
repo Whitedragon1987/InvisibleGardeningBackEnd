@@ -2,6 +2,7 @@ package com.example.invisiblegardening.services;
 
 import com.example.invisiblegardening.exeptions.RecordNotFoundException;
 import com.example.invisiblegardening.models.Company;
+import com.example.invisiblegardening.models.Machine;
 import com.example.invisiblegardening.repositories.CompanyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +20,13 @@ public class CompanyServiceImpl implements CompanyService {
 //  vind een bedrijf aan de hand van een id
     @Override
     public Company getCompany(Long id) {
-        return repository.getById(id);
+        Optional<Company> company = repository.findById(id);
+
+        if(company.isPresent()) {
+            return company.get();
+        } else {
+            throw new RecordNotFoundException("Company does not exist");
+        }
     }
 
 //  sla een nieuw bedrijf op
@@ -39,6 +46,7 @@ public class CompanyServiceImpl implements CompanyService {
     public void updateCompany(Long id, Company company) {
         Optional<Company> optionalCompany = repository.findById(id);
         if (optionalCompany.isPresent()) {
+            repository.deleteById(id);
             repository.save(company);
         } else {
             throw new RecordNotFoundException("company does not exist");

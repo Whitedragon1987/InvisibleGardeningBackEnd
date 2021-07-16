@@ -1,8 +1,6 @@
 package com.example.invisiblegardening.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-
 import javax.persistence.*;
 import java.util.List;
 
@@ -17,8 +15,8 @@ public class Job {
     String jobDescription;
     Boolean employeeNeeded;
 
-    @OneToOne
-    @JsonBackReference("jobEmplyoee")
+    @ManyToOne
+    @JsonBackReference("jobEmployee")
     Employee employee;
 
     @OneToMany(mappedBy = "job")

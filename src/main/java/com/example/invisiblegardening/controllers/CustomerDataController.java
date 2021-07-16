@@ -9,7 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/klantdata")
+@CrossOrigin
+@RequestMapping("customer-datas")
 public class CustomerDataController {
     private final CustomerDataService customerDataService;
 
@@ -19,7 +20,7 @@ public class CustomerDataController {
     }
 
     @GetMapping
-    public List<CustomerDataDto> getCustomerDatas(@RequestParam(value = "customers_name", required = false, defaultValue = "") String customersName) {
+    public List<CustomerDataDto> getCustomerDatas(@RequestParam(value = "name", required = false, defaultValue = "") String customersName) {
 
         var dtos = new ArrayList<CustomerDataDto>();
 
@@ -49,13 +50,14 @@ public class CustomerDataController {
         return CustomerDataDto.fromCustomerData(customerData);
     }
 
-        @PutMapping("/{id}")
+    @PutMapping("/{id}")
     public CustomerDataDto updateCustomerData(@PathVariable Long id, @RequestBody CustomerData customerData) {
         customerDataService.updateCustomerData(id, customerData);
         return CustomerDataDto.fromCustomerData(customerData);
     }
 
-    @PostMapping("/{id}/bedrijf")
+    @PostMapping("/{id}/company" +
+            "")
     public void assignCompanyToCustomerData(@PathVariable("id") Long customerDataId,@RequestBody IdInputDto input) {
         customerDataService.assignCompanyToCustomerData(customerDataId, input.id);
     }

@@ -2,8 +2,10 @@ package com.example.invisiblegardening.services;
 
 import com.example.invisiblegardening.exeptions.RecordNotFoundException;
 import com.example.invisiblegardening.models.CustomerData;
+import com.example.invisiblegardening.models.User;
 import com.example.invisiblegardening.repositories.CompanyRepository;
 import com.example.invisiblegardening.repositories.CustomerDataRepository;
+import com.example.invisiblegardening.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -13,12 +15,15 @@ import java.util.Optional;
 public class CustomerDataServiceImpl implements CustomerDataService{
     private CustomerDataRepository customerDataRepository;
     private CompanyRepository companyRepository;
+    private UserRepository userRepository;
 
     @Autowired
     public CustomerDataServiceImpl(CustomerDataRepository customerDataRepository,
-                                   CompanyRepository companyRepository) {
+                                   CompanyRepository companyRepository,
+                                   UserRepository userRepository) {
         this.customerDataRepository = customerDataRepository;
         this.companyRepository = companyRepository;
+        this.userRepository = userRepository;
     }
 
 //  vind alle klantgegevens en geef deze in een lijst terug
@@ -72,6 +77,21 @@ public class CustomerDataServiceImpl implements CustomerDataService{
             var customerData = optionalCustomerData.get();
 
             customerData.setCompany(company);
+            customerDataRepository.save(customerData);
+        }
+    }
+
+    @Override
+    public void assignUserToCustomerData(String username, Long customerDataId) {
+        var optionalUser = userRepository.findById(username);
+        var optionalCustomerData = customerDataRepository.findById(customerDataId);
+
+
+        if (optionalCustomerData.isPresent() && optionalUser.isPresent()) {
+            var user = optionalUser.get();
+            var customerData = optionalCustomerData.get();
+
+            customerData.setUser(user);
             customerDataRepository.save(customerData);
         }
     }

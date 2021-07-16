@@ -11,7 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("karweien")
+@CrossOrigin
+@RequestMapping("jobs")
 public class JobController {
     private final JobService jobService;
 
@@ -41,12 +42,12 @@ public class JobController {
         return JobDto.fromJob(job);
     }
 
-    @PostMapping("/{id}/werknemer")
+    @PostMapping("/{id}/employee")
     public void assignEmployeeToJob(@PathVariable("id") Long jobId, @RequestBody IdInputDto input) {
         jobService.assignEmployee(jobId, input.id);
     }
 
-       @PutMapping("/{id}")
+    @PutMapping("/{id}")
     public JobDto updateJob(@PathVariable Long id, @RequestBody Job job) {
         jobService.updateJob(id, job);
         return JobDto.fromJob(job);

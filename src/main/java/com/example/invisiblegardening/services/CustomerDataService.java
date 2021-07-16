@@ -13,4 +13,5 @@ public interface CustomerDataService {
     void deleteCustomerData(Long id);
     void updateCustomerData(Long id, CustomerData customerData);
     void assignCompanyToCustomerData(Long companyId, Long customerDataId);
+    void assignUserToCustomerData(String username, Long customerDataId);
 }

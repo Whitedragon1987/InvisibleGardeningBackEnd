@@ -3,6 +3,7 @@ package com.example.invisiblegardening.models;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Employee {
@@ -20,9 +21,9 @@ public class Employee {
     String cityServiceNumber;
     String ibanNumber;
 
-    @OneToOne(mappedBy = "employee")
+    @OneToMany(mappedBy = "employee")
     @JsonBackReference("jobEmployee")
-    Job job;
+    List<Job> joblist;
 
     public Long getId() {
         return id;

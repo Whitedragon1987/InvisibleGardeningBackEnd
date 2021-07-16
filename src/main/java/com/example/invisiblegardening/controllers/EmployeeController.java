@@ -10,22 +10,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("werknemers")
+@CrossOrigin
+@RequestMapping("employees")
 public class EmployeeController {
     private final EmployeeService employeeService;
 
     @Autowired
     public EmployeeController(EmployeeService employeeService) {this.employeeService = employeeService;}
 
-       @GetMapping
-    public List<EmployeeDto> getEmployees(@RequestParam(value = "query", required = false, defaultValue = "") String query) {
+    @GetMapping
+    public List<EmployeeDto> getEmployees(@RequestParam(value = "name", required = false, defaultValue = "") String name) {
         var dtos = new ArrayList<EmployeeDto>();
 
         List<Employee> employeeList;
-        if (query == null) {
+        if (name == null) {
             employeeList = employeeService.getEmployees();
         } else {
-            employeeList = employeeService.findEmployeesByName(query);
+            employeeList = employeeService.findEmployeesByName(name);
         }
 
         for (Employee employee : employeeList) {
@@ -47,7 +48,7 @@ public class EmployeeController {
         return EmployeeDto.fromEmployee(employee);
     }
 
-      @PutMapping("/{id}")
+    @PutMapping("/{id}")
     public EmployeeDto updateEmployee(@PathVariable Long id, @RequestBody Employee employee) {
         employeeService.updateEmployee(id, employee);
         return EmployeeDto.fromEmployee(employee);

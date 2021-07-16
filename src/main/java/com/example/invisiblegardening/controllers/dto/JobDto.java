@@ -9,6 +9,7 @@ public class JobDto {
     public Boolean employeeNeeded;
     public EmployeeDto employee;
 
+
     public static JobDto fromJob(Job job) {
         var dto = new JobDto();
         dto.id = job.getId();

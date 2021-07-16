@@ -27,8 +27,8 @@ public class EmployeeServiceImpl implements EmployeeService{
 
 //  vind alle medewerkers aan de hand van een naam en geef deze in een lijst terug
     @Override
-    public List<Employee> findEmployeesByName(String query) {
-        return employeeRepository.findByNameContainingIgnoreCase(query);}
+    public List<Employee> findEmployeesByName(String name) {
+        return employeeRepository.findByNameContainingIgnoreCase(name);}
 
 //  vind een medewerker aan de hand van een id
     @Override
@@ -53,6 +53,7 @@ public class EmployeeServiceImpl implements EmployeeService{
     public void updateEmployee(Long id, Employee employee) {
         Optional<Employee> optionalEmployee = employeeRepository.findById(id);
         if (optionalEmployee.isPresent()) {
+            employeeRepository.deleteById(id);
             employeeRepository.save(employee);
         } else {
             throw new RecordNotFoundException("employee does not exist");

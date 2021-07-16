@@ -1,8 +1,6 @@
 package com.example.invisiblegardening.controllers.dto;
 
 import com.example.invisiblegardening.models.Employee;
-import com.example.invisiblegardening.models.Job;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 public class EmployeeDto {
     public Long id;
@@ -17,6 +15,8 @@ public class EmployeeDto {
 
 
     public static EmployeeDto fromEmployee(Employee employee) {
+        if (employee == null) return null;
+
         var dto = new EmployeeDto();
         dto.id = employee.getId();
         dto.name = employee.getName();

@@ -66,6 +66,7 @@ public class JobServiceImpl implements JobService{
     public void updateJob(Long id, Job job) {
         Optional<Job> optionalJob = jobRepository.findById(id);
         if (optionalJob.isPresent()) {
+            jobRepository.deleteById(id);
             jobRepository.save(job);
         } else {
             throw new RecordNotFoundException("job does not exist");

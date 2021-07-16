@@ -13,7 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("klant-aanvragen")
+@CrossOrigin
+@RequestMapping("customer-requests")
 public class CustomerRequestController {
     private final CustomerRequestService customerRequestService;
 

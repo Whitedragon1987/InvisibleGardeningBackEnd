@@ -2,13 +2,19 @@ package com.example.invisiblegardening.controllers;
 
 import com.example.invisiblegardening.controllers.dto.CompanyDto;
 import com.example.invisiblegardening.controllers.dto.CompanyInputDto;
+import com.example.invisiblegardening.controllers.dto.JobDto;
 import com.example.invisiblegardening.models.Company;
+import com.example.invisiblegardening.models.Job;
 import com.example.invisiblegardening.services.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RestController
-@RequestMapping("bedrijven")
+@CrossOrigin
+@RequestMapping("company")
 public class CompanyController {
     private final CompanyService companyService;
 
@@ -16,6 +22,7 @@ public class CompanyController {
     public CompanyController(CompanyService companyService) {
         this.companyService = companyService;
     }
+
 
     @GetMapping("/{id}")
     public CompanyDto getCompany(@PathVariable("id") Long id) {
@@ -29,7 +36,7 @@ public class CompanyController {
         return CompanyDto.fromCompany(company);
     }
 
-        @PutMapping("/{id}")
+    @PutMapping("/{id}")
     public CompanyDto updateCompany(@PathVariable Long id, @RequestBody Company company) {
         companyService.updateCompany(id, company);
         return CompanyDto.fromCompany(company);

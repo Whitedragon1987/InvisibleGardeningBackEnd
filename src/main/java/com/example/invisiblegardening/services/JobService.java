@@ -9,7 +9,7 @@ public interface JobService {
     Job getJob(Long id);
     Job saveJob(Job job);
 
-    void assignEmployee(Long jobId, Long employeeId);
+    void assignEmployee(Long jobId, Long EmployeeId);
     void updateJob(Long id, Job job);
     void deleteJob(Long id);
 }
